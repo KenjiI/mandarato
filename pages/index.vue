@@ -28,7 +28,7 @@
         >
           <table v-if="type === 1">
             <tr>
-              <td><cell></cell></td>
+              <td><cell center-color="#ACB9E0"></cell></td>
               <td><cell></cell></td>
               <td><cell></cell></td>
             </tr>
@@ -53,38 +53,45 @@
   </v-layout>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
 import html2canvas from 'html2canvas'
 import Cell from '@/components/Cell.vue'
 
-export default {
-  components: { Cell },
-  data() {
-    return {
-      type: 0,
-      slider: 100,
-      focus: 0,
-      row: [
-        new Array(3).fill('★'),
-        new Array(3).fill('★'),
-        new Array(3).fill('★')
-      ],
-      isDragging: false,
-      start: {
-        x: 0,
-        y: 0
-      },
-      diff: {
-        x: 0,
-        y: 0
-      },
-      end: {
-        x: 0,
-        y: 0
-      }
-    }
-  },
-  mounted() {
+@Component({
+  components: { Cell }
+})
+export default class Mandarato extends Vue {
+  // 3x3 or 9x9
+  private type = 0
+  // default zoom
+  private slider = 100
+  // current focus
+  private focus = 0
+
+  private row = [
+    new Array(3).fill('★'),
+    new Array(3).fill('★'),
+    new Array(3).fill('★')
+  ]
+
+  private isDragging = false
+  private start = {
+    x: 0,
+    y: 0
+  }
+
+  private diff = {
+    x: 0,
+    y: 0
+  }
+
+  private end = {
+    x: 0,
+    y: 0
+  }
+
+  private mounted() {
     const mandara = this.$refs.mandara
     const { start, end, diff } = this
     mandara.addEventListener('mousedown', (event) => {
@@ -123,23 +130,23 @@ export default {
     end.x = start.x
     mandara.style.top = start.y + 'px'
     mandara.style.left = start.x + 'px'
-  },
-  methods: {
-    handleOnCellClick(i, index) {
-      const cell = `${i}:${index}`
-      this.focus = cell
-      console.log(this)
-      this.$nextTick(() => this.$refs[cell][0].focus())
-    },
-    handleOnSavaImage() {
-      html2canvas(this.$refs.mandara, { scale: 2 }).then((canvas) => {
-        const a = document.createElement('a')
-        console.log(canvas)
-        a.download = `test.png`
-        a.href = canvas.toDataURL('image/png')
-        a.click()
-      })
-    }
+  }
+
+  private handleOnCellClick(i, index) {
+    const cell = `${i}:${index}`
+    this.focus = cell
+    console.log(this)
+    this.$nextTick(() => this.$refs[cell][0].focus())
+  }
+
+  private handleOnSavaImage() {
+    html2canvas(this.$refs.mandara, { scale: 2 }).then((canvas) => {
+      const a = document.createElement('a')
+      console.log(canvas)
+      a.download = `test.png`
+      a.href = canvas.toDataURL('image/png')
+      a.click()
+    })
   }
 }
 </script>

@@ -9,6 +9,7 @@
               :key="index"
               class="cell"
               :class="{ center: `${i}:${index}` === '1:1' }"
+              :style="computedStyle(i, index)"
               @dblclick="() => handleOnCellClick(i, index)"
             >
               <v-textarea
@@ -30,25 +31,38 @@
   </v-layout>
 </template>
 
-<script>
-export default {
-  components: {},
-  data() {
-    return {
-      focus: 0,
-      row: [
-        new Array(3).fill(' '),
-        new Array(3).fill(' '),
-        new Array(3).fill(' ')
-      ]
-    }
-  },
-  methods: {
-    handleOnCellClick(i, index) {
-      const cell = `${i}:${index}`
-      this.focus = cell
-      console.log(this)
-      this.$nextTick(() => this.$refs[cell][0].focus())
+<script lang="ts">
+import { Component, Vue, Prop } from 'vue-property-decorator'
+
+@Component
+export default class Cell extends Vue {
+  @Prop({ default: '#cccccc' }) private centerColor!: string
+  @Prop({ default: () => [[], [], []] }) private backgroundColors!: string[][]
+
+  private focus = 0
+  private row: string[][] = [
+    new Array(3).fill(' '),
+    new Array(3).fill(' '),
+    new Array(3).fill(' ')
+  ]
+
+  private handleOnCellClick(i, index) {
+    const cell = `${i}:${index}`
+    this.focus = cell
+    console.log(this)
+    this.$nextTick(() => this.$refs[cell][0].focus())
+  }
+
+  private get computedStyle() {
+    return (i: string, index: string) => {
+      const isCenter = `${i}:${index}` === '1:1'
+      if (!isCenter) {
+        return {}
+      } else {
+        return {
+          backgroundColor: this.centerColor
+        }
+      }
     }
   }
 }
@@ -80,7 +94,6 @@ textarea {
 }
 .center {
   background-color: white;
-  background-color: #cccccc;
 }
 .resize {
   width: 250px;
