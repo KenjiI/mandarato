@@ -106,7 +106,7 @@ export default class Mandarato extends Vue {
   // font-size
   private font = 100
   // current focus
-  private focus = 0
+  private focus: string | null = null
   // backgroundcolors
   private bColors = [
     ['#ACB9E0', '#BDB3E1', '#E7A396'],
@@ -139,31 +139,33 @@ export default class Mandarato extends Vue {
   }
 
   private mounted() {
-    const mandara = this.$refs.mandara
+    const mandara: any = this.$refs.mandara
     const { start, end, diff } = this
-    mandara.addEventListener('mousedown', (event) => {
-      console.log('mousedown')
+    // @ts-ignore
+    mandara.addEventListener('mousedown', (event: MouseEvent) => {
       this.isDragging = true
       start.x = event.clientX
       start.y = event.clientY
     })
-    mandara.addEventListener('mousemove', (event) => {
-      console.log('mousemove')
+    // @ts-ignore
+    mandara.addEventListener('mousemove', (event: MouseEvent) => {
       if (this.isDragging) {
         diff.x = event.clientX - start.x + end.x
         diff.y = event.clientY - start.y + end.y
+        // @ts-ignore
         mandara.style.left = diff.x + 'px'
+        // @ts-ignore
         mandara.style.top = diff.y + 'px'
       }
     })
-    mandara.addEventListener('mouseup', (_) => {
-      console.log('mouseup')
+    // @ts-ignore
+    mandara.addEventListener('mouseup', () => {
       this.isDragging = false
       end.x = diff.x
       end.y = diff.y
     })
-    mandara.addEventListener('mouseleave', (_) => {
-      console.log('mouseleave')
+    // @ts-ignore
+    mandara.addEventListener('mouseleave', () => {
       this.isDragging = false
       end.x = diff.x
       end.y = diff.y
@@ -171,25 +173,27 @@ export default class Mandarato extends Vue {
 
     const clientHeight = document.documentElement.clientHeight
     const clientWidth = document.documentElement.clientWidth
-    start.y = clientHeight / 2 - mandara.offsetHeight / 2
-    start.x = clientWidth / 2 - mandara.offsetWidth / 2
+    start.y = clientHeight / 2 - (mandara as HTMLElement).offsetHeight / 2
+    start.x = clientWidth / 2 - (mandara as HTMLElement).offsetWidth / 2
     end.y = start.y
     end.x = start.x
+    // @ts-ignore
     mandara.style.top = start.y + 'px'
+    // @ts-ignore
     mandara.style.left = start.x + 'px'
   }
 
-  private handleOnCellClick(i, index) {
+  private handleOnCellClick(i: number, index: number) {
     const cell = `${i}:${index}`
     this.focus = cell
-    console.log(this)
+    // @ts-ignore
     this.$nextTick(() => this.$refs[cell][0].focus())
   }
 
   private handleOnSavaImage() {
-    html2canvas(this.$refs.mandara, { scale: 2 }).then((canvas) => {
+    // @ts-ignore
+    html2canvas(this.$refs.mandara, { scale: 2 }).then((canvas: any) => {
       const a = document.createElement('a')
-      console.log(canvas)
       a.download = `your_mandarato.png`
       a.href = canvas.toDataURL('image/png')
       a.click()

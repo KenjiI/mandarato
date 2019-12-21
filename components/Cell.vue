@@ -44,17 +44,20 @@ export default class Cell extends Vue {
   @Prop({ default: '#cccccc' }) private centerColor!: string
   @Prop({ default: '' }) private model!: string
 
-  private focus = 0
+  private focus: string | null = null
   private row: string[][] = [
     new Array(3).fill(' '),
     new Array(3).fill(' '),
     new Array(3).fill(' ')
   ]
 
-  private handleOnCellClick(i, index) {
+  private handleOnCellClick(i: number, index: number) {
+    if (this.isCenter(i, index)) {
+      return
+    }
     const cell = `${i}:${index}`
     this.focus = cell
-    console.log(this)
+    // @ts-ignore
     this.$nextTick(() => this.$refs[cell][0].focus())
   }
 
@@ -67,7 +70,7 @@ export default class Cell extends Vue {
   }
 
   private get computedStyle() {
-    return (i: string, index: string) => {
+    return (i: number, index: number) => {
       // in case of centerColor
       if (!this.isCenter(i, index)) {
         return {}

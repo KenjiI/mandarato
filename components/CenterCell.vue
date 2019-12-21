@@ -39,12 +39,12 @@ export default class Cell extends Vue {
   @Prop({ default: () => null }) private backgroundColors!: string[][] | null
   @Prop({ default: '' }) private value!: string
 
-  private focus = 0
+  private focus: string | null = null
 
-  private handleOnCellClick(i, index) {
+  private handleOnCellClick(i: number, index: number) {
     const cell = `${i}:${index}`
     this.focus = cell
-    console.log(this)
+    // @ts-ignore
     this.$nextTick(() => this.$refs[cell][0].focus())
   }
 
@@ -62,7 +62,7 @@ export default class Cell extends Vue {
   }
 
   private get computedStyle() {
-    return (i: string, index: string) => {
+    return (i: number, index: number) => {
       // in case of backgroundColors
       if (this.backgroundColors && this.backgroundColors[i][index]) {
         return {
