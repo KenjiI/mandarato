@@ -88,6 +88,6 @@ export default {
     }
   },
   router: {
-    base: '/mandarato/dist/'
+    base: '/mandarato/'
   }
 }
