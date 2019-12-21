@@ -28,19 +28,19 @@
         >
           <table v-if="type === 1">
             <tr>
-              <td><cell center-color="#ACB9E0"></cell></td>
-              <td><cell></cell></td>
-              <td><cell></cell></td>
+              <td><cell :center-color="bColors[0][0]"></cell></td>
+              <td><cell :center-color="bColors[0][1]"></cell></td>
+              <td><cell :center-color="bColors[0][2]"></cell></td>
             </tr>
             <tr>
-              <td><cell></cell></td>
-              <td><cell></cell></td>
-              <td><cell></cell></td>
+              <td><cell :center-color="bColors[1][0]"></cell></td>
+              <td><cell :background-colors="bColors"></cell></td>
+              <td><cell :center-color="bColors[1][2]"></cell></td>
             </tr>
             <tr>
-              <td><cell></cell></td>
-              <td><cell></cell></td>
-              <td><cell></cell></td>
+              <td><cell :center-color="bColors[2][0]"></cell></td>
+              <td><cell :center-color="bColors[2][1]"></cell></td>
+              <td><cell :center-color="bColors[2][2]"></cell></td>
             </tr>
           </table>
 
@@ -68,6 +68,12 @@ export default class Mandarato extends Vue {
   private slider = 100
   // current focus
   private focus = 0
+  // backgroundcolors
+  private bColors = [
+    ['#ACB9E0', '#BDB3E1', '#E7A396'],
+    ['#9ABEE0', '#CCCCCC', '#EDC097'],
+    ['#ACCEBC', '#BCDC98', '#F1DC98']
+  ]
 
   private row = [
     new Array(3).fill('★'),

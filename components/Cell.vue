@@ -37,7 +37,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 @Component
 export default class Cell extends Vue {
   @Prop({ default: '#cccccc' }) private centerColor!: string
-  @Prop({ default: () => [[], [], []] }) private backgroundColors!: string[][]
+  @Prop({ default: () => null }) private backgroundColors!: string[][] | null
 
   private focus = 0
   private row: string[][] = [
@@ -55,6 +55,13 @@ export default class Cell extends Vue {
 
   private get computedStyle() {
     return (i: string, index: string) => {
+      // in case of backgroundColors
+      if (this.backgroundColors) {
+        return {
+          backgroundColor: this.backgroundColors[i][index]
+        }
+      }
+      // in case of centerColor
       const isCenter = `${i}:${index}` === '1:1'
       if (!isCenter) {
         return {}
