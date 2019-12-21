@@ -17,6 +17,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
     "core-js": "^2.6.11",
+    "html2canvas": "^1.0.0-rc.5",
     "nuxt": "^2.0.0",
     "vue-property-decorator": "^8.3.0"
   },

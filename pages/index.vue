@@ -1,52 +1,60 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-col cols="12">
-      <v-subheader class="pl-0">拡大・縮小</v-subheader>
-      <v-slider
-        v-model="slider"
-        thumb-label="always"
-        max="125"
-        min="75"
-      ></v-slider>
-      <div>
-        <div class="section">マスの大きさ</div>
-        <v-radio-group v-model="type" :mandatory="false">
-          <v-radio label="3 x 3 マス" :value="0"></v-radio>
-          <v-radio label="9 x 9 マス" :value="1"></v-radio>
-        </v-radio-group>
+  <v-layout column justify-center>
+    <div style="display: flex">
+      <div class="sidearea">
+        <v-subheader class="pl-0">拡大・縮小</v-subheader>
+        <v-slider
+          v-model="slider"
+          thumb-label="always"
+          max="125"
+          min="75"
+        ></v-slider>
+        <div>
+          <div class="section">マスの大きさ</div>
+          <v-radio-group v-model="type" :mandatory="false">
+            <v-radio label="3 x 3 マス" :value="0"></v-radio>
+            <v-radio label="9 x 9 マス" :value="1"></v-radio>
+          </v-radio-group>
+          <v-btn color="primary" @click="handleOnSavaImage"
+            >ダウンロード!</v-btn
+          >
+        </div>
       </div>
-    </v-col>
-    <v-flex>
-      <div
-        ref="mandara"
-        class="resize absolute"
-        :style="{ zoom: slider + '%' }"
-      >
-        <table v-if="type === 1">
-          <tr>
-            <td><cell></cell></td>
-            <td><cell></cell></td>
-            <td><cell></cell></td>
-          </tr>
-          <tr>
-            <td><cell></cell></td>
-            <td><cell></cell></td>
-            <td><cell></cell></td>
-          </tr>
-          <tr>
-            <td><cell></cell></td>
-            <td><cell></cell></td>
-            <td><cell></cell></td>
-          </tr>
-        </table>
+      <v-flex>
+        <div
+          ref="mandara"
+          class="resize absolute"
+          :style="{ zoom: slider + '%' }"
+        >
+          <table v-if="type === 1">
+            <tr>
+              <td><cell></cell></td>
+              <td><cell></cell></td>
+              <td><cell></cell></td>
+            </tr>
+            <tr>
+              <td><cell></cell></td>
+              <td><cell></cell></td>
+              <td><cell></cell></td>
+            </tr>
+            <tr>
+              <td><cell></cell></td>
+              <td><cell></cell></td>
+              <td><cell></cell></td>
+            </tr>
+          </table>
 
-        <cell v-else class="simple-cell"></cell>
-      </div>
-    </v-flex>
+          <div v-else style="background-color: white">
+            <cell class="simple-cell"></cell>
+          </div>
+        </div>
+      </v-flex>
+    </div>
   </v-layout>
 </template>
 
 <script>
+import html2canvas from 'html2canvas'
 import Cell from '@/components/Cell.vue'
 
 export default {
@@ -122,19 +130,33 @@ export default {
       this.focus = cell
       console.log(this)
       this.$nextTick(() => this.$refs[cell][0].focus())
+    },
+    handleOnSavaImage() {
+      html2canvas(this.$refs.mandara, { scale: 2 }).then((canvas) => {
+        const a = document.createElement('a')
+        console.log(canvas)
+        a.download = `test.png`
+        a.href = canvas.toDataURL('image/png')
+        a.click()
+      })
     }
   }
 }
 </script>
 
 <style lang="css" scoped>
+.sidearea {
+  min-width: 200px;
+  height: calc(100vh - 64px);
+  border-right: 1px solid #ddd;
+}
 table {
   border-collapse: collapse;
   border-spacing: 0;
-  background-color: #eee;
   border-top: 5px solid !important;
   border-bottom: 5px solid !important;
   border-left: 5px solid !important;
+  background-color: white;
 }
 tr {
   border-bottom: 5px solid !important;
