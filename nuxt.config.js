@@ -86,5 +86,8 @@ export default {
     typeCheck: {
       eslint: false
     }
+  },
+  router: {
+    base: '/mandarato/dist/'
   }
 }
