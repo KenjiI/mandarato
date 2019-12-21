@@ -5,29 +5,24 @@
         <table class="mandara-frame">
           <tr v-for="i in [0, 1, 2]" :key="i">
             <td
-              v-for="(v, index) in row[i]"
+              v-for="(v, index) in values[i]"
               :key="index"
               class="cell"
               :class="{ center: isCenter(i, index) }"
               :style="computedStyle(i, index)"
               @dblclick="() => handleOnCellClick(i, index)"
             >
-              <template v-if="isCenter(i, index)">
-                {{ model }}
-              </template>
-              <template v-else>
-                <v-textarea
-                  v-show="focus === `${i}:${index}`"
-                  :ref="`${i}:${index}`"
-                  v-model="row[i][index]"
-                  :rows="1"
-                  solo
-                  @blur="() => handleOnBlur(i, index)"
-                />
-                <div v-show="focus !== `${i}:${index}`">
-                  {{ row[i][index] }}
-                </div>
-              </template>
+              <v-textarea
+                v-show="focus === `${i}:${index}`"
+                :ref="`${i}:${index}`"
+                v-model="values[i][index]"
+                :rows="1"
+                solo
+                @blur="() => handleOnBlur(i, index)"
+              />
+              <div v-show="focus !== `${i}:${index}`">
+                {{ values[i][index] }}
+              </div>
             </td>
           </tr>
         </table>
@@ -41,15 +36,10 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 
 @Component
 export default class Cell extends Vue {
-  @Prop({ default: '#cccccc' }) private centerColor!: string
-  @Prop({ default: '' }) private model!: string
+  @Prop({ default: () => null }) private backgroundColors!: string[][] | null
+  @Prop({ default: '' }) private value!: string
 
   private focus = 0
-  private row: string[][] = [
-    new Array(3).fill(' '),
-    new Array(3).fill(' '),
-    new Array(3).fill(' ')
-  ]
 
   private handleOnCellClick(i, index) {
     const cell = `${i}:${index}`
@@ -58,8 +48,13 @@ export default class Cell extends Vue {
     this.$nextTick(() => this.$refs[cell][0].focus())
   }
 
+  private get values() {
+    return this.value
+  }
+
   private handleOnBlur() {
     this.focus = null
+    this.$emit('input', this.values)
   }
 
   private get isCenter() {
@@ -68,12 +63,10 @@ export default class Cell extends Vue {
 
   private get computedStyle() {
     return (i: string, index: string) => {
-      // in case of centerColor
-      if (!this.isCenter(i, index)) {
-        return {}
-      } else {
+      // in case of backgroundColors
+      if (this.backgroundColors && this.backgroundColors[i][index]) {
         return {
-          backgroundColor: this.centerColor
+          backgroundColor: this.backgroundColors[i][index]
         }
       }
     }

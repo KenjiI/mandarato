@@ -1,7 +1,8 @@
 <template>
   <v-app>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-toolbar-title v-text="title" />
+    <v-app-bar :clipped-left="clipped" fixed app dark color="primary">
+      <v-icon dark>mdi-apps</v-icon>
+      <v-toolbar-title style="font-weight: bold" v-text="title" />
       <v-spacer />
     </v-app-bar>
     <v-content>

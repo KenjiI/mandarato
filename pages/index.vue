@@ -6,8 +6,15 @@
         <v-slider
           v-model="slider"
           thumb-label="always"
-          max="125"
-          min="75"
+          :max="125"
+          :min="75"
+        ></v-slider>
+        <v-subheader class="pl-0">フォントサイズ</v-subheader>
+        <v-slider
+          v-model="font"
+          thumb-label="always"
+          :max="125"
+          :min="25"
         ></v-slider>
         <div>
           <div class="section">マスの大きさ</div>
@@ -24,28 +31,57 @@
         <div
           ref="mandara"
           class="resize absolute"
-          :style="{ zoom: slider + '%' }"
+          :style="{ zoom: slider + '%', fontSize: font + '%' }"
         >
           <table v-if="type === 1">
             <tr>
-              <td><cell :center-color="bColors[0][0]"></cell></td>
-              <td><cell :center-color="bColors[0][1]"></cell></td>
-              <td><cell :center-color="bColors[0][2]"></cell></td>
+              <td v-for="i in [0, 1, 2]" :key="`0:${i}`">
+                <cell
+                  :model="values[0][i]"
+                  :center-color="bColors[0][i]"
+                ></cell>
+              </td>
             </tr>
             <tr>
-              <td><cell :center-color="bColors[1][0]"></cell></td>
-              <td><cell :background-colors="bColors"></cell></td>
-              <td><cell :center-color="bColors[1][2]"></cell></td>
+              <td>
+                <cell
+                  :model="values[1][0]"
+                  :center-color="bColors[1][0]"
+                ></cell>
+              </td>
+              <td>
+                <center-cell
+                  v-model="values"
+                  :background-colors="bColors"
+                ></center-cell>
+              </td>
+              <td>
+                <cell
+                  :model="values[1][2]"
+                  :center-color="bColors[1][2]"
+                ></cell>
+              </td>
             </tr>
             <tr>
-              <td><cell :center-color="bColors[2][0]"></cell></td>
-              <td><cell :center-color="bColors[2][1]"></cell></td>
-              <td><cell :center-color="bColors[2][2]"></cell></td>
+              <td v-for="i in [0, 1, 2]" :key="`2:${i}`">
+                <cell
+                  :model="values[2][i]"
+                  :center-color="bColors[2][i]"
+                ></cell>
+              </td>
             </tr>
           </table>
 
           <div v-else style="background-color: white">
-            <cell class="simple-cell"></cell>
+            <center-cell
+              v-model="values"
+              :background-colors="[
+                ['', '', ''],
+                ['', '#cccccc', ''],
+                ['', '', '']
+              ]"
+              class="simple-cell"
+            ></center-cell>
           </div>
         </div>
       </v-flex>
@@ -57,15 +93,18 @@
 import { Component, Vue } from 'vue-property-decorator'
 import html2canvas from 'html2canvas'
 import Cell from '@/components/Cell.vue'
+import CenterCell from '@/components/CenterCell.vue'
 
 @Component({
-  components: { Cell }
+  components: { Cell, CenterCell }
 })
 export default class Mandarato extends Vue {
   // 3x3 or 9x9
-  private type = 0
+  private type = 1
   // default zoom
   private slider = 100
+  // font-size
+  private font = 100
   // current focus
   private focus = 0
   // backgroundcolors
@@ -75,12 +114,14 @@ export default class Mandarato extends Vue {
     ['#ACCEBC', '#BCDC98', '#F1DC98']
   ]
 
-  private row = [
-    new Array(3).fill('★'),
-    new Array(3).fill('★'),
-    new Array(3).fill('★')
+  // store only cetervalued for each table
+  private values = [
+    new Array(3).fill(' '),
+    new Array(3).fill(' '),
+    new Array(3).fill(' ')
   ]
 
+  // in dragging
   private isDragging = false
   private start = {
     x: 0,
@@ -149,7 +190,7 @@ export default class Mandarato extends Vue {
     html2canvas(this.$refs.mandara, { scale: 2 }).then((canvas) => {
       const a = document.createElement('a')
       console.log(canvas)
-      a.download = `test.png`
+      a.download = `your_mandarato.png`
       a.href = canvas.toDataURL('image/png')
       a.click()
     })
