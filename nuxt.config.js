@@ -84,7 +84,7 @@ export default {
   },
   typescript: {
     typeCheck: {
-      eslint: true
+      eslint: false
     }
   }
 }
