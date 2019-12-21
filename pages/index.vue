@@ -6,7 +6,7 @@
         <v-slider
           v-model="slider"
           thumb-label="always"
-          :max="125"
+          :max="150"
           :min="75"
         ></v-slider>
         <v-subheader class="pl-0">フォントサイズ</v-subheader>
@@ -14,7 +14,7 @@
           v-model="font"
           thumb-label="always"
           :max="125"
-          :min="25"
+          :min="10"
         ></v-slider>
         <div>
           <div class="section">マスの大きさ</div>
@@ -27,7 +27,7 @@
           >
         </div>
       </div>
-      <v-flex>
+      <v-flex style="padding: 16px 0 0 32px;">
         <div
           ref="mandara"
           class="resize absolute"
@@ -92,6 +92,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import html2canvas from 'html2canvas'
+import Moveable from 'moveable'
 import Cell from '@/components/Cell.vue'
 import CenterCell from '@/components/CenterCell.vue'
 
@@ -121,66 +122,25 @@ export default class Mandarato extends Vue {
     new Array(3).fill(' ')
   ]
 
-  // in dragging
-  private isDragging = false
-  private start = {
-    x: 0,
-    y: 0
-  }
-
-  private diff = {
-    x: 0,
-    y: 0
-  }
-
-  private end = {
-    x: 0,
-    y: 0
-  }
-
   private mounted() {
     const mandara: any = this.$refs.mandara
-    const { start, end, diff } = this
-    // @ts-ignore
-    mandara.addEventListener('mousedown', (event: MouseEvent) => {
-      this.isDragging = true
-      start.x = event.clientX
-      start.y = event.clientY
-    })
-    // @ts-ignore
-    mandara.addEventListener('mousemove', (event: MouseEvent) => {
-      if (this.isDragging) {
-        diff.x = event.clientX - start.x + end.x
-        diff.y = event.clientY - start.y + end.y
-        // @ts-ignore
-        mandara.style.left = diff.x + 'px'
-        // @ts-ignore
-        mandara.style.top = diff.y + 'px'
-      }
-    })
-    // @ts-ignore
-    mandara.addEventListener('mouseup', () => {
-      this.isDragging = false
-      end.x = diff.x
-      end.y = diff.y
-    })
-    // @ts-ignore
-    mandara.addEventListener('mouseleave', () => {
-      this.isDragging = false
-      end.x = diff.x
-      end.y = diff.y
+
+    const moveable = new Moveable(document.body, {
+      target: mandara,
+      container: document.body,
+      draggable: true,
+      resizable: false,
+      scalable: false,
+      rotatable: false,
+      pinchable: true,
+      origin: false,
+      throttleDrag: 0
     })
 
-    const clientHeight = document.documentElement.clientHeight
-    const clientWidth = document.documentElement.clientWidth
-    start.y = clientHeight / 2 - (mandara as HTMLElement).offsetHeight / 2
-    start.x = clientWidth / 2 - (mandara as HTMLElement).offsetWidth / 2
-    end.y = start.y
-    end.x = start.x
-    // @ts-ignore
-    mandara.style.top = start.y + 'px'
-    // @ts-ignore
-    mandara.style.left = start.x + 'px'
+    moveable.on('drag', ({ target, left, top }) => {
+      target!.style.left = `${left}px`
+      target!.style.top = `${top}px`
+    })
   }
 
   private handleOnCellClick(i: number, index: number) {
@@ -224,12 +184,9 @@ td {
 }
 .resize {
   overflow: auto;
-  /* resize: both; */
 }
 .absolute {
   position: absolute;
-  left: 0;
-  top: 0;
 }
 .simple-cell {
   border: 5px solid !important;
@@ -237,5 +194,11 @@ td {
 .section {
   font-size: 0.875rem;
   color: rgba(0, 0, 0, 0.6);
+}
+</style>
+
+<style type="css">
+.moveable-line {
+  background: none !important;
 }
 </style>

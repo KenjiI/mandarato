@@ -731,6 +731,40 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
+"@daybrush/drag@^0.11.1":
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/@daybrush/drag/-/drag-0.11.1.tgz#919e205a9423800df8f67b413b04884655d16908"
+  integrity sha512-7TEpK7MUGMTarTQ7Z7eTqwgR8FV9oCEyk02Q/uL/FIKzysnY+BLK8gD871w/CEp3GH7jIFuaXEec5qTxxG1AOw==
+  dependencies:
+    "@daybrush/utils" "^0.10.0"
+
+"@daybrush/utils@^0.10.0", "@daybrush/utils@^0.10.1":
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/@daybrush/utils/-/utils-0.10.1.tgz#212588261fb9638fa3ed223fd0c6e0f3d0f2b43a"
+  integrity sha512-pKnlI3C+u/qgkhypQQT9G7YwEmBp+6XD5ZHzVCKtA0avuku//KGdLoIT6QL78aXI7ZPlJwY31t24+6xkxqdoJg==
+
+"@egjs/agent@^2.1.5":
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@egjs/agent/-/agent-2.1.5.tgz#692d2c92b1d8b6f36d0ceccc627199490b445698"
+  integrity sha512-PfdMXd+4WiZN9Xcc1MU31w/RSi6GK6hgufuADRKNY60nXvT34dnXaIyEQlTBkviDfYSOZ8kYW66udyiEMcpqVA==
+
+"@egjs/children-differ@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@egjs/children-differ/-/children-differ-1.0.0.tgz#7f74d2aa47e9ae342cdc8e1e50c440391de1ec53"
+  integrity sha512-NxaJx+dzLUVqLb6iPcu7Mt5m2HDH55VqqZUxGKZ74DKAsL1jxbXSv0jeql0ShN6ZuocULLgr+fztz2bsaBBLkQ==
+  dependencies:
+    "@egjs/list-differ" "^1.0.0"
+
+"@egjs/component@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@egjs/component/-/component-2.1.2.tgz#c466a0a6fc6ba2d479814dcbe6ee4643c25a2e5b"
+  integrity sha512-7tnPiqxbSZ0porzlm0+/O3qZdanMj0zOq0sb17wQXuaRG49XKKKJaO+SacGnZDqf308N5hzJ0m9fZ4+j+VBvXA==
+
+"@egjs/list-differ@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@egjs/list-differ/-/list-differ-1.0.0.tgz#2277aff52e3e4bd9318d5c30ffc3ba3b6216f05e"
+  integrity sha512-HsbMKc0ZAQH+EUeCmI/2PvTYSybmkaWwakU8QGDYYgMVIg9BQ5sM0A0Nnombjxo2+JzXHxmH+jw//yGX+y6GYw==
+
 "@emotion/cache@^10.0.17":
   version "10.0.19"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.19.tgz#d258d94d9c707dcadaf1558def968b86bb87ad71"
@@ -980,6 +1014,11 @@
     "@types/istanbul-lib-coverage" "^2.0.0"
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
+
+"@moveable/matrix@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@moveable/matrix/-/matrix-0.3.0.tgz#18003a182c7ba208c06ba964dc3d560597cc7cae"
+  integrity sha512-DMS57q86qqmyB/4xZNSu4V0TEBBUmuUI/jdIuNKqRQO/bhkFJeB3d6K7nhl8bThO2F9Ha0YBCROXLJUoFNpJkw==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -6002,6 +6041,11 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
+framework-utils@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/framework-utils/-/framework-utils-0.2.1.tgz#207976eeca139ce195561d49bf94c7792c173b52"
+  integrity sha512-KSB3kl/hlR4LiKBbK3hEydNFgj1fM3ymmxTmT9doeUVaMr7mTpIRmeTJ3/aCMl52Z0/It8Fm5pEJBQRLcb/yCw==
+
 fresh@0.5.2, fresh@^0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
@@ -8483,6 +8527,15 @@ move-concurrently@^1.0.1:
     rimraf "^2.5.4"
     run-queue "^1.0.3"
 
+moveable@^0.13.1:
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/moveable/-/moveable-0.13.1.tgz#810bde6df638542819d7e5e38050f91b4482d4e3"
+  integrity sha512-ehc8w4pphqNq9jpLySh9D/8N8Thd/LECDYOW9tpJTgfiHmtGvN/ZBMC7Ft1hEqeSM3N+fN6fC2jXPD/iybPjOw==
+  dependencies:
+    "@egjs/component" "^2.1.2"
+    preact "^10.0.4"
+    preact-moveable "^0.15.1"
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -9978,6 +10031,26 @@ postcss@7.x.x, postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.16,
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
+preact-css-styler@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/preact-css-styler/-/preact-css-styler-1.0.1.tgz#73789efbe89c46bcc5c96b5c5fd08519db17a083"
+  integrity sha512-8n5owEv0/WwE38eiW3BfwNzre0WY+xtkZJjAUr/v/WcRetpaeFllm5b993WkU7jwGJFDnwZvxtjj3zIcMdDpEQ==
+  dependencies:
+    "@daybrush/utils" "^0.10.1"
+
+preact-moveable@^0.15.1:
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/preact-moveable/-/preact-moveable-0.15.1.tgz#021586f92cdfa1631a661a77e20ffb6326741225"
+  integrity sha512-LeIIg4Uns4nlPmdOXxUxoh55u/3VdSSlOv2DvDNdtF0Y/VYXjIYqsHBZSFupXE4/70FPepfq4P6KRs9vwqH5IQ==
+  dependencies:
+    preact-css-styler "^1.0.0"
+    react-moveable "^0.16.2"
+
+preact@^10.0.4:
+  version "10.1.1"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.1.1.tgz#1fd12e3ed6b74993ed8805f68e9d953cc914889a"
+  integrity sha512-mKW7Cdn68XMhdes0FjyIbA8+IVPsj3aIuAEQlZVkj9E2VhujWcXZEfwirBoXK6qZYfj1djaTBDCFKjAu1sK93w==
+
 prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
@@ -10312,6 +10385,13 @@ react-clientside-effect@^1.2.0:
   dependencies:
     "@babel/runtime" "^7.0.0"
 
+react-css-styler@^0.4.0:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/react-css-styler/-/react-css-styler-0.4.1.tgz#a6fe111b48b74b18f968c4a0bab4546409b58efe"
+  integrity sha512-nAJihRuGRHhzHbrs6dhlFe5xXHgXGFa2OngXKMEHSoaQ4i/kBc1q6CIFfdbVrhGS5Y/G2vtxoqJDW8yG+uPuMw==
+  dependencies:
+    "@daybrush/utils" "^0.10.0"
+
 react-dev-utils@^9.0.0:
   version "9.1.0"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-9.1.0.tgz#3ad2bb8848a32319d760d0a84c56c14bdaae5e81"
@@ -10418,6 +10498,20 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-moveable@^0.16.2:
+  version "0.16.2"
+  resolved "https://registry.yarnpkg.com/react-moveable/-/react-moveable-0.16.2.tgz#38ca7a468566ed09c96ca39eea36afb3f3ee725f"
+  integrity sha512-V0LepnNdy7uSaqIuqWZtxs0Ot4EG7OKykIeghC5madkWlBajJmChOIUcEra5DSw3PjYPqR8wvxkjv9cr9JzYGA==
+  dependencies:
+    "@daybrush/drag" "^0.11.1"
+    "@daybrush/utils" "^0.10.0"
+    "@egjs/agent" "^2.1.5"
+    "@egjs/children-differ" "^1.0.0"
+    "@moveable/matrix" "^0.3.0"
+    framework-utils "^0.2.1"
+    react-css-styler "^0.4.0"
+    react-pure-props "^0.1.5"
+
 react-popper-tooltip@^2.8.3:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/react-popper-tooltip/-/react-popper-tooltip-2.10.1.tgz#e10875f31916297c694d64a677d6f8fa0a48b4d1"
@@ -10438,6 +10532,13 @@ react-popper@^1.3.6:
     prop-types "^15.6.1"
     typed-styles "^0.0.7"
     warning "^4.0.2"
+
+react-pure-props@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/react-pure-props/-/react-pure-props-0.1.5.tgz#f9d11255d4f52cba1c833d78e6f9b246a3a644db"
+  integrity sha512-U9meZmY0hf4tJVv4T6T7aP6Hfu4LCLddPZuBNiSuxmdz0RfiFxz6ly8rX83iRbGOf+XV6ltpzsJ27pNFwspRrQ==
+  dependencies:
+    shallowequal "^1.1.0"
 
 react-sizeme@^2.6.7:
   version "2.6.10"

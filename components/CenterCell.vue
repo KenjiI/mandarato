@@ -10,13 +10,13 @@
               class="cell"
               :class="{ center: isCenter(i, index) }"
               :style="computedStyle(i, index)"
-              @dblclick="() => handleOnCellClick(i, index)"
+              @click="() => handleOnCellClick(i, index)"
             >
               <v-textarea
                 v-show="focus === `${i}:${index}`"
                 :ref="`${i}:${index}`"
                 v-model="values[i][index]"
-                :rows="1"
+                :rows="2"
                 solo
                 @blur="() => handleOnBlur(i, index)"
               />

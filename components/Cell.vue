@@ -10,7 +10,7 @@
               class="cell"
               :class="{ center: isCenter(i, index) }"
               :style="computedStyle(i, index)"
-              @dblclick="() => handleOnCellClick(i, index)"
+              @click="() => handleOnCellClick(i, index)"
             >
               <template v-if="isCenter(i, index)">
                 {{ model }}
@@ -20,7 +20,7 @@
                   v-show="focus === `${i}:${index}`"
                   :ref="`${i}:${index}`"
                   v-model="row[i][index]"
-                  :rows="1"
+                  :rows="2"
                   solo
                   @blur="() => handleOnBlur(i, index)"
                 />
