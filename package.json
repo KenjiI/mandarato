@@ -1,7 +1,7 @@
 {
   "name": "mandarato",
   "version": "1.0.0",
-  "description": "My funkadelic Nuxt.js project",
+  "description": "ブラウザ上でマンダラートが作れるサイト",
   "author": "Kenji Ishii",
   "private": true,
   "scripts": {
